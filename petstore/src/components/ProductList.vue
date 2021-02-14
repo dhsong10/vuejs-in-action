@@ -73,7 +73,7 @@ export default {
   methods: {
     addToCart(productId) {
       this.carts.push(productId);
-      this.$emit('cart:update', this.carts.length);
+      this.$emit('cart:update', this.carts);
     },
   },
 };
