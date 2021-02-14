@@ -1,6 +1,11 @@
 <template>
   <b-container fluid>
-    <Product v-for="product in products" :key="product.id" :product="product" />
+    <Product
+      v-for="product in products"
+      :key="product.id"
+      :product="product"
+      @cart:add="addToCart"
+    />
   </b-container>
 </template>
 
@@ -62,7 +67,14 @@ export default {
           availableInventory: 5,
         },
       ],
+      carts: [],
     };
+  },
+  methods: {
+    addToCart(productId) {
+      this.carts.push(productId);
+      this.$emit('cart:update', this.carts.length);
+    },
   },
 };
 </script>

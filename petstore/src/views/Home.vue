@@ -1,7 +1,7 @@
 <template>
   <div>
-    <AppHeader />
-    <ProductList />
+    <AppHeader :size="cartSize" />
+    <ProductList @cart:update="onUpdateCart" />
   </div>
 </template>
 
@@ -14,6 +14,16 @@ export default {
   components: {
     AppHeader,
     ProductList,
+  },
+  data() {
+    return {
+      cartSize: 0,
+    };
+  },
+  methods: {
+    onUpdateCart(cartSize) {
+      this.cartSize = cartSize;
+    },
   },
 };
 </script>

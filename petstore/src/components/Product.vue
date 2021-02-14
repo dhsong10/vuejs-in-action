@@ -12,8 +12,19 @@
       <p v-html="product.description" />
       <p class="text-sm-left">$ {{ product.price | priceToDollar }}</p>
       <p>
-        <b-button variant="primary"> 장바구니 담기</b-button>
-        <span class="font-weight-bold mx-3">지금 구매하세요!</span>
+        <b-button
+          variant="primary"
+          @click="addToCart"
+          :disabled="!canAddToCart"
+        >
+          장바구니 담기</b-button
+        >
+        <span
+          class="font-weight-bold mx-3"
+          :class="{ 'text-danger': !canAddToCart }"
+        >
+          {{ advertisementMessage }}
+        </span>
         <span v-for="counter in product.rating" :key="`fill-${counter}`">
           ★
         </span>
@@ -31,6 +42,28 @@ export default {
     product: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    addToCart() {
+      if (this.product.availableInventory > 0) {
+        this.product.availableInventory -= 1;
+        this.$emit('cart:add', this.product.id);
+      }
+    },
+  },
+  computed: {
+    advertisementMessage() {
+      if (this.product.availableInventory === 0) {
+        return '품절!';
+      } else if (this.product.availableInventory < 5) {
+        return `${this.product.availableInventory} 남았습니다!`;
+      } else {
+        return '지금 구매하세요!';
+      }
+    },
+    canAddToCart() {
+      return this.product.availableInventory > 0;
     },
   },
   filters: {
