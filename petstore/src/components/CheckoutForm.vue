@@ -113,7 +113,7 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$emit('checkout:hide');
+      this.$router.push('/');
     },
   },
   filters: {

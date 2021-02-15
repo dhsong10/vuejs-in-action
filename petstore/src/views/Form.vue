@@ -1,25 +1,22 @@
 <template>
   <div>
     <AppHeader />
-    <ProductList />
+    <CheckoutForm />
   </div>
 </template>
 
 <script>
 import AppHeader from '@/components/AppHeader.vue';
-import ProductList from '@/components/ProductList.vue';
+import CheckoutForm from '@/components/CheckoutForm.vue';
 
 export default {
-  name: 'Home',
+  name: 'Form',
   components: {
     AppHeader,
-    ProductList,
+    CheckoutForm,
   },
   data() {
     return {};
-  },
-  created() {
-    this.$store.commit('clearCart');
   },
 };
 </script>

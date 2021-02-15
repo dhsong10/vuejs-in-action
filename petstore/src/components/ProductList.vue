@@ -1,16 +1,12 @@
 <template>
   <b-container fluid>
-    <Product
-      v-for="product in products"
-      :key="product.id"
-      :product="product"
-      @cart:add="addToCart"
-    />
+    <Product v-for="product in products" :key="product.id" :product="product" />
   </b-container>
 </template>
 
 <script>
 import Product from '@/components/Product.vue';
+import axios from 'axios';
 
 export default {
   components: {
@@ -70,11 +66,10 @@ export default {
       carts: [],
     };
   },
-  methods: {
-    addToCart(productId) {
-      this.carts.push(productId);
-      this.$emit('cart:update', this.carts);
-    },
+  created() {
+    axios.get('data/products.json').then(response => {
+      this.products = response.data.products;
+    });
   },
 };
 </script>

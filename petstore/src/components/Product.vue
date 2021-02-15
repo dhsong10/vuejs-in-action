@@ -48,7 +48,7 @@ export default {
     addToCart() {
       if (this.product.availableInventory > 0) {
         this.product.availableInventory -= 1;
-        this.$emit('cart:add', this.product.id);
+        this.$store.commit('addToCart', this.product.id);
       }
     },
   },
